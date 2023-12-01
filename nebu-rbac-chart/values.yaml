@@ -1,0 +1,11 @@
+namespace: dedicated-namespace
+
+serviceAccounts:
+  - name: user1
+  - name: user2
+
+role:
+  rules:
+    - apiGroups: [""]
+      resources: ["pods", "pods/portforward", "services"]
+      verbs: ["get", "list", "watch", "create"]
