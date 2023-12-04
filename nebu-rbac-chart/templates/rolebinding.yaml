@@ -1,16 +1,28 @@
-{{- range .Values.serviceAccounts }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ .name }}-binding
-  namespace: {{ $.Values.namespace }}
+  name: user-a-read-only
+  namespace: {{ .Values.namespace }}
 subjects:
-- kind: ServiceAccount
-  name: {{ .name }}
-  namespace: {{ $.Values.namespace }}
+- kind: User
+  name: {{ .Values.userA }}
+  apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
-  name: user-role
+  name: read-only-role
   apiGroup: rbac.authorization.k8s.io
+
 ---
-{{- end }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: user-b-write
+  namespace: {{ .Values.namespace }}
+subjects:
+- kind: User
+  name: {{ .Values.userB }}
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: write-role
+  apiGroup: rbac.authorization.k8s.io
