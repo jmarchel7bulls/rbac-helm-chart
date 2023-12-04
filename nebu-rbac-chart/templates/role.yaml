@@ -2,7 +2,6 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: {{ .Values.namespace }}
   name: read-only-role
 rules:
   - apiGroups: [""]
@@ -14,7 +13,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: {{ .Values.namespace }}
   name: write-role
 rules:
   - apiGroups: [""]

@@ -4,7 +4,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ . }}-read-only
-  namespace: {{ $.Values.namespace }}
 subjects:
 - kind: User
   name: {{ . }}
@@ -22,7 +21,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ . }}-write
-  namespace: {{ $.Values.namespace }}
 subjects:
 - kind: User
   name: {{ . }}
