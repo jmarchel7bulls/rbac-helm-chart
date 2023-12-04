@@ -1,11 +1,8 @@
-namespace: dedicated-namespace
+namespace: "example-namespace"
 
-serviceAccounts:
-  - name: user1
-  - name: user2
+podManagerUser: "janek"
+configmapManagerUser: "radek"
+secretManagerUser: "janek"
+deploymentManagerUser: "radek"
 
-role:
-  rules:
-    - apiGroups: [""]
-      resources: ["pods", "pods/portforward", "services"]
-      verbs: ["get", "list", "watch", "create"]
+monitoringGroup: "7bulls"

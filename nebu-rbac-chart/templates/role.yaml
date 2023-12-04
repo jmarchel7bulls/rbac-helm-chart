@@ -2,6 +2,52 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   namespace: {{ .Values.namespace }}
-  name: user-role
+  name: pod-manager
 rules:
-{{- toYaml .Values.role.rules | nindent 2 }}
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch", "create", "delete", "update"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: configmap-manager
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get", "create", "update"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: monitoring-role
+rules:
+- apiGroups: [""]
+  resources: ["pods/log", "events"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: secret-manager
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "create", "delete", "update"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: deployment-manager
+rules:
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch", "create", "delete", "update"]
