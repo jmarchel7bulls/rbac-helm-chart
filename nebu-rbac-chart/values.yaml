@@ -1,4 +1,7 @@
-namespace: "example-namespace"
+readOnlyUsers:
+  - "radek"
+  - "janek"
 
-userA: "janek"
-userB: "radek"
+writeUsers:
+  - "radek"
+  - "janek"

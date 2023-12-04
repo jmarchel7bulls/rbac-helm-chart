@@ -1,28 +1,35 @@
+{{- range .Values.readOnlyUsers }}
+# read-only
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: user-a-read-only
-  namespace: {{ .Values.namespace }}
+  name: {{ . }}-read-only
+  namespace: {{ $.Values.namespace }}
 subjects:
 - kind: User
-  name: {{ .Values.userA }}
+  name: {{ . }}
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
   name: read-only-role
   apiGroup: rbac.authorization.k8s.io
-
 ---
+{{- end }}
+
+{{- range .Values.writeUsers }}
+# write
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: user-b-write
-  namespace: {{ .Values.namespace }}
+  name: {{ . }}-write
+  namespace: {{ $.Values.namespace }}
 subjects:
 - kind: User
-  name: {{ .Values.userB }}
+  name: {{ . }}
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
   name: write-role
   apiGroup: rbac.authorization.k8s.io
+---
+{{- end }}
